@@ -23,7 +23,6 @@ export default function FullBlog({ blog }: { blog: Blog }) {
               <div className="pr-6 flex items-center">
                 <Avatar
                   name={author.name !== null ? author.name : "Anonymous"}
-                  size={10}
                 />
               </div>
               <div>
