@@ -80,7 +80,18 @@ blogRouter.put('/', async (c) => {
 
 blogRouter.get('/bulk', async (c) => {
     const prisma = c.get("prisma")
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+        select: {
+            content: true,
+            title: true,
+            id: true,
+            author: {
+                select: {
+                    name: true
+                }
+            }
+        }
+    });
     return c.json({
         posts
     })
@@ -93,6 +104,16 @@ blogRouter.get('/:id', async (c) => {
         where : {
             id: id
         },
+        select: {
+            id: true,
+            title: true,
+            content: true,
+            author: {
+                select: {
+                    name: true
+                }
+            }
+        }
     })
     return c.json({
         blog
