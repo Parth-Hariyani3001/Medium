@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import InputBox from "./InputBox";
 import { SignupInput } from "@parthxd/blog-types";
 import { BACKEND_URL } from "../config";
@@ -28,6 +28,12 @@ export default function Auth({ type }: { type: "signup" | "signin" }) {
       alert("There is an error");
     }
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigateTo("/blogs");
+    }
+  }, [navigateTo]);
 
   return (
     <div className=" h-screen flex justify-center items-center">
